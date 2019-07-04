@@ -8,7 +8,10 @@ import android.os.StrictMode;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.PasswordTransformationMethod;
+import android.text.method.SingleLineTransformationMethod;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -93,6 +96,45 @@ public class SignIn extends AppCompatActivity {
         btnSignIn = (Button) findViewById(R.id.btnSignIn);
 
         GetToken();
+
+        //***************************************************************************
+        txtpassword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (txtpassword.getRight() - txtpassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+
+
+                        if (txtpassword.getTransformationMethod().getClass().getSimpleName() .equals("PasswordTransformationMethod")) {
+                            txtpassword.setTransformationMethod(new SingleLineTransformationMethod());
+
+                            txtpassword.setCompoundDrawablesWithIntrinsicBounds( 0, 0, R.drawable.toogle_off, 0);
+                        }
+                        else {
+                            txtpassword.setTransformationMethod(new PasswordTransformationMethod());
+                            txtpassword.setCompoundDrawablesWithIntrinsicBounds( 0, 0, R.drawable.toogle, 0);
+                        }
+
+                        txtpassword.setSelection(txtpassword.getText().length());
+
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
+
+
+//***********************************************************
+
+
 
         lblforgotpassword.setOnClickListener(new View.OnClickListener() {
             @Override

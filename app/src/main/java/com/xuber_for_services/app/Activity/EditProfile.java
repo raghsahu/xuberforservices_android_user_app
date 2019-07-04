@@ -16,7 +16,10 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.PasswordTransformationMethod;
+import android.text.method.SingleLineTransformationMethod;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -498,6 +501,108 @@ public class EditProfile extends AppCompatActivity {
             confirm_password = (EditText) findViewById(R.id.confirm_password);
             changePasswordBtn = (Button) findViewById(R.id.changePasswordBtn);
             btnCancel = (Button) findViewById(R.id.btnCancel);
+
+
+            //***************************************************
+            current_password.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    final int DRAWABLE_LEFT = 0;
+                    final int DRAWABLE_TOP = 1;
+                    final int DRAWABLE_RIGHT = 2;
+                    final int DRAWABLE_BOTTOM = 3;
+
+                    if(event.getAction() == MotionEvent.ACTION_UP) {
+                        if(event.getRawX() >= (current_password.getRight() - current_password.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                            // your action here
+
+
+                            if (current_password.getTransformationMethod().getClass().getSimpleName() .equals("PasswordTransformationMethod")) {
+                                current_password.setTransformationMethod(new SingleLineTransformationMethod());
+                                current_password.setCompoundDrawablesWithIntrinsicBounds( 0, 0, R.drawable.toogle_off, 0);
+                            }
+                            else {
+                                current_password.setTransformationMethod(new PasswordTransformationMethod());
+                                current_password.setCompoundDrawablesWithIntrinsicBounds( 0, 0, R.drawable.toogle, 0);
+                            }
+
+                            current_password.setSelection(current_password.getText().length());
+
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+
+//***********************************************************
+            //***************************************************
+            confirm_password.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    final int DRAWABLE_LEFT = 0;
+                    final int DRAWABLE_TOP = 1;
+                    final int DRAWABLE_RIGHT = 2;
+                    final int DRAWABLE_BOTTOM = 3;
+
+                    if(event.getAction() == MotionEvent.ACTION_UP) {
+                        if(event.getRawX() >= (confirm_password.getRight() - confirm_password.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                            // your action here
+
+
+                            if (confirm_password.getTransformationMethod().getClass().getSimpleName() .equals("PasswordTransformationMethod")) {
+                                confirm_password.setTransformationMethod(new SingleLineTransformationMethod());
+                                confirm_password.setCompoundDrawablesWithIntrinsicBounds( 0, 0, R.drawable.toogle_off, 0);
+                            }
+                            else {
+                                confirm_password.setTransformationMethod(new PasswordTransformationMethod());
+                                confirm_password.setCompoundDrawablesWithIntrinsicBounds( 0, 0, R.drawable.toogle, 0);
+                            }
+
+                            confirm_password.setSelection(confirm_password.getText().length());
+
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+
+//***********************************************************
+            //***************************************************
+            new_password.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    final int DRAWABLE_LEFT = 0;
+                    final int DRAWABLE_TOP = 1;
+                    final int DRAWABLE_RIGHT = 2;
+                    final int DRAWABLE_BOTTOM = 3;
+
+                    if(event.getAction() == MotionEvent.ACTION_UP) {
+                        if(event.getRawX() >= (new_password.getRight() - new_password.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                            // your action here
+
+
+                            if (new_password.getTransformationMethod().getClass().getSimpleName() .equals("PasswordTransformationMethod")) {
+                                new_password.setTransformationMethod(new SingleLineTransformationMethod());
+                                new_password.setCompoundDrawablesWithIntrinsicBounds( 0, 0, R.drawable.toogle_off, 0);
+                            }
+                            else {
+                                new_password.setTransformationMethod(new PasswordTransformationMethod());
+                                new_password.setCompoundDrawablesWithIntrinsicBounds( 0, 0, R.drawable.toogle, 0);
+                            }
+
+                            new_password.setSelection(new_password.getText().length());
+
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+            });
+
+//***********************************************************
+
 
             btnCancel.setOnClickListener(new View.OnClickListener() {
                 @Override
